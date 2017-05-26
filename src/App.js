@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import RowsList from './RowsList.js'
 import TableObs from './TableObs'
 import { Row, Col, Grid } from 'react-bootstrap';
+import './App.css';
 
 class App extends Component {
 
@@ -41,9 +42,7 @@ class App extends Component {
  render() {
   return(
     <div>
-      <Grid>
-        <Row>
-          <Col md={6} lg={6} xs={6} >
+          <Col md={6} lg={6} xs={6} style={{'height':'100vh'}}>
               {this.state.obs? <TableObs
                                 currentIdObs={this.state.currentIdObs}
                                 obs={this.state.obs}
@@ -57,8 +56,6 @@ class App extends Component {
                 currentIdObs={this.state.currentIdObs}
                 onObsClick={(id)=>this.onObsClick(id)}/>
           </Col>
-        </Row>
-      </Grid>
     </div>
     )
   }
