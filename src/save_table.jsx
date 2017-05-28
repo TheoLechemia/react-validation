@@ -21,3 +21,38 @@
 	          })}
 	          </tbody>
 	       </Table>
+
+
+	                   getTrProps={(state, rowInfo, column) => {
+					    return {
+					      style: {
+					        background: rowInfo.id_synthese === this.props.currentIdObs ? 'green' : 'red'
+					      }
+					    }
+					  }}
+
+
+					              getTrProps={(state, rowInfo, column, instance) => {
+						    return {
+						      onClick: e => {
+						        console.log('A Td Element was clicked!')
+						        console.log('It was in this column:', column)
+						        console.log('It was in this row:', rowInfo.row)
+						        console.log('It was in this table instance:', instance)
+						      }
+							    }
+							  }
+							}
+
+
+		    	<div>
+    	{this.props.obs !== null?
+    		  <ReactTable
+            className='-striped -highlight'
+            data={this.props.obs.features}
+            columns={columns}
+            defaultPageSize={10}
+            loading={this.props.loading}
+             />
+       : <h3> Yolo </h3>}
+	     </div>

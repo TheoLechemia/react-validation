@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       'obs':null,
       'currentIdObs':null,
+      'loading':true
     }
   }
   componentDidMount() {
@@ -20,7 +21,7 @@ class App extends Component {
       return response.json();
       }).then((json)=>{
         const obs = json;
-        this.setState({'obs':obs});
+        this.setState({'obs':obs, 'loading':false});
       })
   }
   validateOrDelete(id){
@@ -35,6 +36,8 @@ class App extends Component {
     this.setState({'currentIdObs':id})
   }
 
+
+
   zoomOnObs(id){
     this.setState({'currentIdObs':id})
   }
@@ -43,18 +46,19 @@ class App extends Component {
   return(
     <div>
           <Col md={6} lg={6} xs={6} style={{'height':'100vh'}}>
-              {this.state.obs? <TableObs
-                                currentIdObs={this.state.currentIdObs}
-                                obs={this.state.obs}
-                                onValidateOrDelete={(id)=>this.validateOrDelete(id)}
-                                onZoom={(id)=>this.zoomOnObs(id)}
-                         />:null}
+              <TableObs
+                  currentIdObs={this.state.currentIdObs}
+                  obs={this.state.obs}
+                  onValidateOrDelete={(id)=>this.validateOrDelete(id)}
+                  onZoom={(id)=>this.zoomOnObs(id)}
+                />
           </Col>
           <Col md={6} lg={6} xs={6} >
               <GeojsonMap
                 obs={this.state.obs}
                 currentIdObs={this.state.currentIdObs}
-                onObsClick={(id)=>this.onObsClick(id)}/>
+                onObsClick={(id)=>this.onObsClick(id)}
+                loading={this.state.loading}/>
           </Col>
     </div>
     )
